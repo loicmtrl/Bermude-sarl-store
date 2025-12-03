@@ -120,7 +120,7 @@ const AccountNav = ({
                   route={route!}
                   data-testid="overview-link"
                 >
-                  Overview
+                  Résumé
                 </AccountNavLink>
               </li>
               <li>
@@ -138,7 +138,7 @@ const AccountNav = ({
                   route={route!}
                   data-testid="addresses-link"
                 >
-                  Addresses
+                  Adresses
                 </AccountNavLink>
               </li>
               <li>
@@ -147,7 +147,7 @@ const AccountNav = ({
                   route={route!}
                   data-testid="orders-link"
                 >
-                  Orders
+                  Commandes
                 </AccountNavLink>
               </li>
               <li className="text-grey-700">
@@ -156,7 +156,7 @@ const AccountNav = ({
                   onClick={handleLogout}
                   data-testid="logout-button"
                 >
-                  Log out
+                  Déconnexion
                 </button>
               </li>
             </ul>

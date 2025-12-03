@@ -22,7 +22,8 @@ import { getRegion } from "./regions"
  */
 export async function retrieveCart(cartId?: string, fields?: string) {
   const id = cartId || (await getCartId())
-  fields ??= "*items, *region, *items.product, *items.variant, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name"
+  fields ??=
+    "*items, *region, *items.product, *items.variant, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name"
 
   if (!id) {
     return null
@@ -40,7 +41,7 @@ export async function retrieveCart(cartId?: string, fields?: string) {
     .fetch<HttpTypes.StoreCartResponse>(`/store/carts/${id}`, {
       method: "GET",
       query: {
-        fields
+        fields,
       },
       headers,
       next,
@@ -57,7 +58,7 @@ export async function getOrSetCart(countryCode: string) {
     throw new Error(`Region not found for country code: ${countryCode}`)
   }
 
-  let cart = await retrieveCart(undefined, 'id,region_id')
+  let cart = await retrieveCart(undefined, "id,region_id")
 
   const headers = {
     ...(await getAuthHeaders()),
@@ -90,7 +91,9 @@ export async function updateCart(data: HttpTypes.StoreUpdateCart) {
   const cartId = await getCartId()
 
   if (!cartId) {
-    throw new Error("No existing cart found, please create one before updating")
+    throw new Error(
+      "Aucun panier existant trouvé, veuillez en créer un avant de mettre à jour1"
+    )
   }
 
   const headers = {
@@ -121,7 +124,9 @@ export async function addToCart({
   countryCode: string
 }) {
   if (!variantId) {
-    throw new Error("Missing variant ID when adding to cart")
+    throw new Error(
+      "Identifiant de variante manquant lors de l'ajout au panier"
+    )
   }
 
   const cart = await getOrSetCart(countryCode)
