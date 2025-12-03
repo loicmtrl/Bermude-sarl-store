@@ -85,7 +85,7 @@ const Register = ({ setCurrentView }: Props) => {
           .
         </span>
         <SubmitButton className="w-full mt-6" data-testid="register-button">
-          Join
+          S'inscrire
         </SubmitButton>
       </form>
       <span className="text-center text-ui-fg-base text-small-regular mt-6">

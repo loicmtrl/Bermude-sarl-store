@@ -110,10 +110,24 @@ export default async function Footer() {
             )}
           </div>
         </div>
-        <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
+        <div className="flex w-full flex-col small:flex-row small:items-center small:justify-between gap-y-4 mb-16 text-ui-fg-muted border-t border-ui-border-base py-8">
           <Text className="txt-compact-small">
             © {new Date().getFullYear()} Bermude. Tout droits réservés.
           </Text>
+          <div className="flex gap-x-8 txt-compact-small">
+            <LocalizedClientLink
+              href="/content/terms-of-use"
+              className="hover:text-ui-fg-base"
+            >
+              Conditions d'utilisation
+            </LocalizedClientLink>
+            <LocalizedClientLink
+              href="/content/privacy-policy"
+              className="hover:text-ui-fg-base"
+            >
+              Politique de confidentialité
+            </LocalizedClientLink>
+          </div>
         </div>
       </div>
     </footer>
