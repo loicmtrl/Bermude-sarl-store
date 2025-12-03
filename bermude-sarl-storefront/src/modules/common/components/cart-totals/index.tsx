@@ -29,13 +29,13 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
     <div>
       <div className="flex flex-col gap-y-2 txt-medium text-ui-fg-subtle ">
         <div className="flex items-center justify-between">
-          <span>Subtotal (excl. shipping and taxes)</span>
+          <span>Sous-total (sans frais de port ni taxes)</span>
           <span data-testid="cart-subtotal" data-value={item_subtotal || 0}>
             {convertToLocale({ amount: item_subtotal ?? 0, currency_code })}
           </span>
         </div>
         <div className="flex items-center justify-between">
-          <span>Shipping</span>
+          <span>Frais de port</span>
           <span data-testid="cart-shipping" data-value={shipping_subtotal || 0}>
             {convertToLocale({ amount: shipping_subtotal ?? 0, currency_code })}
           </span>

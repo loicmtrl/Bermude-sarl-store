@@ -14,6 +14,7 @@ import {
   setCartId,
 } from "./cookies"
 import { getRegion } from "./regions"
+import { cookies as nextCookies } from "next/headers"
 
 /**
  * Retrieves a cart by its ID. If no ID is provided, it will use the cart ID from the cookies.
@@ -203,8 +204,18 @@ export async function deleteLineItem(lineId: string) {
     throw new Error("Missing cart ID when deleting line item")
   }
 
-  const headers = {
-    ...(await getAuthHeaders()),
+  // If the user is authenticated but still has an anonymous cart id cookie,
+  // sending the Authorization header can cause the store to reject the
+  // request due to ownership mismatch. Prefer to omit the Authorization
+  // header when a token exists — the cart cookie (cartId) will be used.
+  const cookies = await nextCookies()
+  const token = cookies.get("_medusa_jwt")?.value
+
+  let headers: Record<string, string> = {}
+  if (!token) {
+    headers = {
+      ...(await getAuthHeaders()),
+    }
   }
 
   await sdk.store.cart
