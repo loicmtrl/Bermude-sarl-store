@@ -16,9 +16,20 @@ const DeleteButton = ({
 
   const handleDelete = async (id: string) => {
     setIsDeleting(true)
-    await deleteLineItem(id).catch((err) => {
+    try {
+      await deleteLineItem(id)
+    } catch (err) {
+      // Surface a visible error so the user knows why deletion failed
+      try {
+        const msg = (err as Error).message || "Échec de la suppression"
+        // eslint-disable-next-line no-alert
+        alert(msg)
+      } catch (e) {
+        // ignore
+      }
+    } finally {
       setIsDeleting(false)
-    })
+    }
   }
 
   return (
@@ -29,6 +40,7 @@ const DeleteButton = ({
       )}
     >
       <button
+        type="button"
         className="flex gap-x-1 text-ui-fg-subtle hover:text-ui-fg-base cursor-pointer"
         onClick={() => handleDelete(id)}
       >

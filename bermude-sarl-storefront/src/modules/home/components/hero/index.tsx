@@ -1,33 +1,43 @@
-import { Github } from "@medusajs/icons"
+"use client"
 import { Button, Heading } from "@medusajs/ui"
+import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 const Hero = () => {
+  const router = useRouter()
+
   return (
-    <div className="h-[75vh] w-full border-b border-ui-border-base relative bg-ui-bg-subtle">
-      <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center small:p-32 gap-6">
-        <span>
-          <Heading
-            level="h1"
-            className="text-3xl leading-10 text-ui-fg-base font-normal"
-          >
-            Ecommerce Starter Template
-          </Heading>
-          <Heading
-            level="h2"
-            className="text-3xl leading-10 text-ui-fg-subtle font-normal"
-          >
-            Powered by Medusa and Next.js
-          </Heading>
-        </span>
-        <a
-          href="https://github.com/medusajs/nextjs-starter-medusa"
-          target="_blank"
+    <div className="relative h-[75vh] w-full flex items-center justify-center border-b border-ui-border-base">
+      {/* Background image */}
+      <Image
+        src="/shop.webp"
+        alt="Shop"
+        fill
+        priority
+        className="object-cover object-center"
+      />
+
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/40"></div>
+
+      {/* Content */}
+      <div className="relative z-10 text-center text-white px-4 max-w-2xl">
+        <Heading level="h1" className="text-4xl md:text-5xl font-bold mb-4">
+          Découvrez notre univers Shopping
+        </Heading>
+
+        <p className="text-lg md:text-xl mb-8 opacity-90">
+          Une sélection unique de produits tendance, soigneusement choisis pour
+          vous.
+        </p>
+
+        <Button
+          onClick={() => router.push("/store")}
+          size="large"
+          className="px-10 py-5 text-lg font-semibold bg-white text-black hover:bg-gray-200"
         >
-          <Button variant="secondary">
-            View on GitHub
-            <Github />
-          </Button>
-        </a>
+          Découvrir le catalogue
+        </Button>
       </div>
     </div>
   )

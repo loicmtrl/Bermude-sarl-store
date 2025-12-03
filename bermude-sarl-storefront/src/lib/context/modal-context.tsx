@@ -28,7 +28,7 @@ export const ModalProvider = ({ children, close }: ModalProviderProps) => {
 export const useModal = () => {
   const context = useContext(ModalContext)
   if (context === null) {
-    throw new Error("useModal must be used within a ModalProvider")
+    throw new Error("useModal doit être utilisé dans un ModalProvider.")
   }
   return context
 }

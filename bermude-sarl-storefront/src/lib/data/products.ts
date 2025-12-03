@@ -53,36 +53,47 @@ export const listProducts = async ({
     ...(await getCacheOptions("products")),
   }
 
-  return sdk.client
-    .fetch<{ products: HttpTypes.StoreProduct[]; count: number }>(
-      `/store/products`,
-      {
-        method: "GET",
-        query: {
-          limit,
-          offset,
-          region_id: region?.id,
-          fields:
-            "*variants.calculated_price,+variants.inventory_quantity,*variants.images,+metadata,+tags,",
-          ...queryParams,
-        },
-        headers,
-        next,
-        cache: "force-cache",
-      }
-    )
-    .then(({ products, count }) => {
-      const nextPage = count > offset + limit ? pageParam + 1 : null
-
-      return {
-        response: {
-          products,
-          count,
-        },
-        nextPage: nextPage,
-        queryParams,
-      }
+  try {
+    const resp = await sdk.client.fetch<{
+      products: HttpTypes.StoreProduct[]
+      count: number
+    }>(`/store/products`, {
+      method: "GET",
+      query: {
+        limit,
+        offset,
+        region_id: region?.id,
+        fields:
+          "*variants.calculated_price,+variants.inventory_quantity,*variants.images,+metadata,+tags,",
+        ...queryParams,
+      },
+      headers,
+      next,
+      cache: "force-cache",
     })
+
+    const { products, count } = resp
+
+    const nextPage = count > offset + limit ? pageParam + 1 : null
+
+    return {
+      response: {
+        products,
+        count,
+      },
+      nextPage: nextPage,
+      queryParams,
+    }
+  } catch (err) {
+    // If fetching products fails (for example due to auth/cookie issues),
+    // return an empty list instead of letting the error bubble and
+    // breaking the catalog page.
+    return {
+      response: { products: [], count: 0 },
+      nextPage: null,
+      queryParams,
+    }
+  }
 }
 
 /**
