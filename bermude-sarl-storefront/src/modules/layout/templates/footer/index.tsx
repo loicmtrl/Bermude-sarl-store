@@ -27,7 +27,7 @@ export default async function Footer() {
             {productCategories && productCategories?.length > 0 && (
               <div className="flex flex-col gap-y-2">
                 <span className="txt-small-plus txt-ui-fg-base">
-                  Categories
+                  Catégories
                 </span>
                 <ul
                   className="grid grid-cols-1 gap-2"
@@ -112,7 +112,7 @@ export default async function Footer() {
         </div>
         <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
           <Text className="txt-compact-small">
-            © {new Date().getFullYear()} Bermude. All rights reserved.
+            © {new Date().getFullYear()} Bermude. Tout droits réservés.
           </Text>
         </div>
       </div>

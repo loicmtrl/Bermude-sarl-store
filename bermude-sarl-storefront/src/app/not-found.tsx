@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "404",
-  description: "Something went wrong",
+  description: "Une erreur s'est produite",
 }
 
 export default function NotFound() {

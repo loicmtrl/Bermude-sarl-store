@@ -36,24 +36,24 @@ const Login = ({ setCurrentView }: Props) => {
             label="Password"
             name="password"
             type="password"
-            autoComplete="current-password"
+            autoComplete="mot de passe actuel"
             required
             data-testid="password-input"
           />
         </div>
         <ErrorMessage error={message} data-testid="login-error-message" />
         <SubmitButton data-testid="sign-in-button" className="w-full mt-6">
-          Sign in
+          Connexion
         </SubmitButton>
       </form>
       <span className="text-center text-ui-fg-base text-small-regular mt-6">
-        Not a member?{" "}
+        Vous n'êtes pas membre ?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
           className="underline"
           data-testid="register-button"
         >
-          Join us
+          Rejoignez-nous
         </button>
         .
       </span>
